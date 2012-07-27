@@ -8,9 +8,20 @@
 # Java class files
 *.class
 
+# Local configuration file (sdk path, etc)
+local.properties
+
+#Intelli-J IDEA modules
+.idea/
+.idea_modules/
+
 # generated files
 bin/
 gen/
+target/
+lib_managed/
+src_managed/
+project/boot/
 
-# Local configuration file (sdk path, etc)
-local.properties
+#Mac OSX Extras 
+*.DS_Store
