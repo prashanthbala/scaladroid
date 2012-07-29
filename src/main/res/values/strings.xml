@@ -3,4 +3,5 @@
     <string name="edit_message">Enter a message</string>
     <string name="button_send">Submit</string>
     <string name="title_activity_main">Send Messages</string>
+    <string name="title_activity_display_message">Messages</string>
 </resources>

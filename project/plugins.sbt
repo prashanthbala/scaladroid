@@ -3,3 +3,7 @@ resolvers += Resolver.url("scalasbt releases", new URL("http://scalasbt.artifact
 addSbtPlugin("org.scala-sbt" % "sbt-android-plugin" % "0.6.1")
 
 addSbtPlugin("com.github.mpeltonen" % "sbt-idea" % "1.0.0")
+
+addSbtPlugin("me.lessis" % "sbt-growl-plugin" % "0.1.3")
+
+resolvers += "less is" at "http://repo.lessis.me"

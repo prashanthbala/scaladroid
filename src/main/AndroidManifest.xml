@@ -12,6 +12,11 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <activity android:label="@string/title_activity_display_message" android:name=".DisplayMessageActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                       android:value="com.prashanthbala.personal.androidscala.test1.MainActivity" />
+        </activity>
     </application>
 
     <uses-sdk android:minSdkVersion="16"
