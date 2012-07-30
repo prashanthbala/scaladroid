@@ -21,7 +21,7 @@ class DisplayMessageActivity extends Activity with TypedActivity {
     val msg : String = intent getStringExtra MainActivity.EXTRA_MESSAGE
 
     val text: TextView = new TextView(this)
-    text setTextSize 40
+    text setTextSize 10
     text setText msg
 
     setContentView(text)
