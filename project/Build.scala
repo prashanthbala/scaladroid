@@ -47,7 +47,7 @@ object General {
       keyalias in Android := "change-me",
       libraryDependencies ++= Seq(
         "org.scalatest" %% "scalatest" % "1.8" % "test",
-        "net.databinder.dispatch" %% "core" % "0.9.0",
+        //"net.databinder.dispatch" %% "core" % "0.9.0",
         "com.codahale" % "jerkson_2.9.1" % "0.5.0"
       ),
       resolvers ++= Seq(
