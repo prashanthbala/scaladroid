@@ -4,6 +4,7 @@ import com.prashanthbala.personal.androidscala.test1._
 import junit.framework.Assert._
 import _root_.android.test.AndroidTestCase
 import _root_.android.test.ActivityInstrumentationTestCase2
+import activities.MainActivity
 
 class AndroidTests extends AndroidTestCase {
   def testPackageIsCorrect() {

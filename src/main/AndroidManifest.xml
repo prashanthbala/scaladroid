@@ -6,14 +6,14 @@
         android:label="@string/app_name"
         android:debuggable="true">
 
-        <activity android:label="@string/app_name" android:name=".MainActivity">
+        <activity android:label="@string/app_name" android:name="activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
-        <activity android:label="@string/title_activity_display_message" android:name=".DisplayMessageActivity">
+        <activity android:label="@string/title_activity_display_message" android:name="activities.DisplayMessageActivity">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                        android:value="com.prashanthbala.personal.androidscala.test1.MainActivity" />
         </activity>

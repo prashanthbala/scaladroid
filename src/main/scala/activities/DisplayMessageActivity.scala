@@ -1,9 +1,10 @@
-package com.prashanthbala.personal.androidscala.test1
+package activities
 
 import android.app.Activity
 import android.os.Bundle
 import android.content.Intent
 import android.widget.TextView
+import com.prashanthbala.personal.androidscala.test1.{TR, TypedActivity}
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,7 +19,7 @@ class DisplayMessageActivity extends Activity with TypedActivity {
     super.onCreate(savedInstanceState)
     setContentView(TR.layout.activity_display_message.id)
     val intent: Intent = getIntent
-    val msg : String = intent getStringExtra MainActivity.EXTRA_MESSAGE
+    val msg: String = intent getStringExtra MainActivity.EXTRA_MESSAGE
 
     val text: TextView = new TextView(this)
     text setTextSize 10
