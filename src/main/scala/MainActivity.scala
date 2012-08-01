@@ -5,8 +5,8 @@ import android.widget.EditText
 import android.view.View
 import android.content.Intent
 import android.app.Activity
-import dispatch._
 import com.codahale.jerkson.Json._
+import actors.Future
 
 class MainActivity extends Activity with TypedActivity with ApacheHttpClient{
   override def onCreate(bundle: Bundle) {
@@ -24,22 +24,23 @@ class MainActivity extends Activity with TypedActivity with ApacheHttpClient{
     val intent: Intent = new Intent(this, classOf[DisplayMessageActivity])
     //val message : String = findView[EditText](TR.editTextField).getText.toString
 
-    val url = R.conf.Symbol("default_api_base_url")
+    val url:String = MainActivity.DEFAULT_URL
 
-    val message = get(url)
+    val message : Future[Option[String]] = get(url)
 
-    intent.putExtra(MainActivity.EXTRA_MESSAGE, message())
-    startActivity(intent)
+    message map { msg =>
+      intent.putExtra(MainActivity.EXTRA_MESSAGE, msg.getOrElse("Nothing to do here"))
+      startActivity(intent)
+    }
   }
 
   override def onStop() {
     super.onStop()
-
-    Http.shutdown()
   }
 
 }
 
 object  MainActivity {
   val EXTRA_MESSAGE : String = "com.prashanthbala.personal.androidscala.MESSAGE"
+  val DEFAULT_URL :String = "http://192.168.1.76:9000/"
 }

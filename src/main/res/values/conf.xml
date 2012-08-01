@@ -1,5 +1,0 @@
-<resources>
-    <conf name="Apache_connection_TimeOutSec">50</conf>
-    <conf name="Apache_connection_socket_TimeoutSec">50</conf>
-    <conf name="default_api_base_url"></conf>
-</resources>

@@ -13,14 +13,15 @@ import org.apache.http.client.methods.HttpGet
 import scala.concurrent.ops._
 import org.apache.http.params.HttpConnectionParams
 import android.util.Log
-import parallel.Future
+import scala.actors.Futures.future
+import scala.actors.Future
 
 
 trait ApacheHttpClient {
 
-  def get(url: String): () => Option[String] = {
-    val connectionTimeOutSec = R.conf.Symbol("Apache_connection_TimeOutSec")
-    val socketTimeoutSec = R.conf.Symbol("Apache_connection_socket_TimeoutSec")
+  def get(url: String): Future[Option[String]] = {
+    val connectionTimeOutSec = ApacheHttpClient.DEFAULT_CONNECTION_SOCKET_TIMEOUT_SECONDS
+    val socketTimeoutSec = ApacheHttpClient.DEFAULT_CONNECTION_SOCKET_TIMEOUT_SECONDS
 
     future[Option[String]] {
       val httpGet = new HttpGet(url)
@@ -50,10 +51,13 @@ trait ApacheHttpClient {
         case e: Exception => Log.w(ApacheHttpClient.TAG, ("Something went wrong. getting while connecting to url" + url), e)
                              None
       }
+      message
     }
   }
 }
 
 object ApacheHttpClient {
   val TAG = "ApacheHttpClient.scala"
+  val DEFAULT_CONNECTION_TIMEOUT_SECONDS = 50
+  val DEFAULT_CONNECTION_SOCKET_TIMEOUT_SECONDS = 50
 }
