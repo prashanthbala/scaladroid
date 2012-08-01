@@ -38,25 +38,26 @@ trait ApacheHttpClient {
       val httpClient = new DefaultHttpClient(httpParams) //params are optional, but prevent timeouts
 
       val message = try {
+        var content=""
         val response = httpClient execute (httpGet)
-        val entity = response getEntity
-        var content = ""
+        val entity = Option(response getEntity)
         entity match {
-          case null => //do nothing
-          case _ => val inputStream = entity.getContent
-          content = io.Source.fromInputStream(inputStream).getLines.mkString
-          inputStream.close
+          case None  => //do nothing
+          case Some(_entity) =>
+            val inputStream = _entity.getContent
+            content = io.Source.fromInputStream(inputStream).getLines.mkString
+            inputStream.close
         }
         httpClient.getConnectionManager.shutdown
 
-        content != "" match {
+        content.isEmpty match {
           case true => None
           case false => Some(content)
         }
       }
       catch {
         // Expected types of exceptions - ClientProtocolException, IOException
-        case e: Exception => Log.w(ApacheHttpClient.TAG, ("Something went wrong. getting while connecting to url" + url), e)
+        case e: Exception => Log.w(ApacheHttpClient.TAG, ("Something went wrong. getting while GET connecting to url" + url), e)
         None
       }
       message
@@ -85,7 +86,7 @@ trait ApacheHttpClient {
       }
       catch {
         // Expected types of exceptions - ClientProtocolException, IOException
-        case e: Exception => Log.w(ApacheHttpClient.TAG, ("Something went wrong. getting while posting to url" + url), e)
+        case e: Exception => Log.w(ApacheHttpClient.TAG, ("Something went wrong. getting while POST connecting to url" + url), e)
         None
       }
     }

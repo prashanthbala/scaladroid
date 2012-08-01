@@ -7,6 +7,7 @@ import android.content.Intent
 import android.app.Activity
 import com.codahale.jerkson.Json._
 import actors.Future
+import actors.Futures._
 import com.prashanthbala.personal.androidscala.test1.{TR, R, TypedActivity}
 import services.ApacheHttpClient
 
@@ -27,18 +28,19 @@ class MainActivity extends Activity with TypedActivity with ApacheHttpClient {
 
   def sendMessage(view: View): Unit = {
     val intent: Intent = new Intent(this, classOf[DisplayMessageActivity])
-    //val message : String = findView[EditText](TR.editTextField).getText.toString
+    val customUrl : String = findView[EditText](TR.editTextField).getText.toString
 
-    val url: String = MainActivity.DEFAULT_URL
+    val url: String = customUrl.isEmpty match {
+      case true => MainActivity.DEFAULT_URL
+      case false => customUrl
+    }
 
     val message: Future[Option[String]] = get(url)
 
-    val sendMessage = message map {
-      msg =>
-        intent.putExtra(MainActivity.EXTRA_MESSAGE, msg.getOrElse("Nothing to do here"))
-        startActivity(intent)
-    }
-    sendMessage.run
+    val _message = message.apply()
+
+    intent.putExtra(MainActivity.EXTRA_MESSAGE, _message.getOrElse("Something went wrong while getting message from server"))
+    startActivity(intent)
   }
 
   override def onStop() {
@@ -49,5 +51,5 @@ class MainActivity extends Activity with TypedActivity with ApacheHttpClient {
 
 object MainActivity {
   val EXTRA_MESSAGE: String = "com.prashanthbala.personal.androidscala.MESSAGE"
-  val DEFAULT_URL: String = "http://10.0.2.2:9000/"
+  val DEFAULT_URL: String = "http://10.0.2.2:9000/json"
 }
