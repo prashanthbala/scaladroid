@@ -48,10 +48,18 @@ object General {
       libraryDependencies ++= Seq(
         "org.scalatest" %% "scalatest" % "1.8" % "test",
         //"net.databinder.dispatch" %% "core" % "0.9.0",
-        "com.codahale" % "jerkson_2.9.1" % "0.5.0"
+        //"com.codahale" % "jerkson_2.9.1" % "0.5.0"
+        //"org.codehaus.jackson" % "jackson-mapper-asl" % "2.0.2",
+        //"org.codehaus.jackson" % "jackson-core-asl" % "2.0.2",
+        //"com.fasterxml" % "jackson-scala" % "1.9.1"
+        "net.liftweb" % "lift-webkit_2.9.1" % "2.4" % "compile->default",
+        "net.liftweb" % "lift-mapper_2.9.1" % "2.4" % "compile->default",
+        "net.liftweb" % "lift-wizard_2.9.1" % "2.4" % "compile->default"
       ),
       resolvers ++= Seq(
-        "Codahale Repo" at "http://repo.codahale.com"
+        "Codahale Repo" at "http://repo.codahale.com",
+         "Scala Tools Releases" at "https://oss.sonatype.org/content/groups/scala-tools/"
+         //"Java.net Maven2 Repository" at "http://download.java.net/maven/2/"
       )
     )
 }

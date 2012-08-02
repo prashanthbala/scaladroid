@@ -5,12 +5,11 @@ import android.widget.EditText
 import android.view.View
 import android.content.Intent
 import android.app.Activity
-import com.codahale.jerkson.Json._
 import actors.Future
 import actors.Futures._
 import com.prashanthbala.personal.androidscala.test1.{TR, R, TypedActivity}
 import services.ApacheHttpClient
-
+import net.liftweb.json._
 
 class MainActivity extends Activity with TypedActivity with ApacheHttpClient {
   override def onCreate(bundle: Bundle) {
@@ -37,9 +36,13 @@ class MainActivity extends Activity with TypedActivity with ApacheHttpClient {
 
     val message: Future[Option[String]] = get(url)
 
-    val _message = message.apply()
+    val _message = message.apply().getOrElse("Something went wrong while getting message from server")
 
-    intent.putExtra(MainActivity.EXTRA_MESSAGE, _message.getOrElse("Something went wrong while getting message from server"))
+    implicit val formats = DefaultFormats
+
+    val maybeMsg = JsonParser.parse(_message).extract[Option[Message]]
+
+    intent.putExtra(MainActivity.EXTRA_MESSAGE, maybeMsg.toString)
     startActivity(intent)
   }
 
