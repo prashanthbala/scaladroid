@@ -8,10 +8,10 @@ import android.app.Activity
 import actors.Future
 import actors.Futures._
 import com.prashanthbala.personal.androidscala.test1.{TR, R, TypedActivity}
-import services.ApacheHttpClient
+import services.{Logger, ApacheHttpClient}
 import net.liftweb.json._
 
-class MainActivity extends Activity with TypedActivity with ApacheHttpClient {
+class MainActivity extends Activity with TypedActivity with ApacheHttpClient with Logger{
   override def onCreate(bundle: Bundle) {
     super.onCreate(bundle)
     setContentView(R.layout.main)
@@ -39,6 +39,8 @@ class MainActivity extends Activity with TypedActivity with ApacheHttpClient {
     val _message = message.apply().getOrElse("Something went wrong while getting message from server")
 
     implicit val formats = DefaultFormats
+
+    warn ("This is the message : " + _message)
 
     val maybeMsg = JsonParser.parse(_message).extract[Option[Message]]
 

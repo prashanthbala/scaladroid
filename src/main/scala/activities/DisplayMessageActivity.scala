@@ -3,8 +3,11 @@ package activities
 import android.app.Activity
 import android.os.Bundle
 import android.content.Intent
-import android.widget.TextView
+import android.widget._
 import com.prashanthbala.personal.androidscala.test1.{TR, TypedActivity}
+import android.widget.AdapterView.OnItemClickListener
+import android.view.View
+import view.ImageAdapter
 
 /**
  * Created with IntelliJ IDEA.
@@ -26,5 +29,22 @@ class DisplayMessageActivity extends Activity with TypedActivity {
     text setText msg
 
     setContentView(text)
+
+    setContentView(TR.layout.activity_display_message.id)
+
+    val strings : Array[String] = Array[String]("yo", "wattup", "how does it")
+    val adapter = new ArrayAdapter[String](this, android.R.layout.simple_list_item_1, strings)
+    val gridView : GridView = findView(TR.gridview)
+    gridView setAdapter(new ImageAdapter(this))
+
+    // Create a message handling object as an anonymous class.
+    gridView.setOnItemClickListener({
+      def onItemClick(adapterView : AdapterView[ImageAdapter], v : View, position : Int, id : Long) {
+        Toast.makeText(DisplayMessageActivity.this, "" + position, Toast.LENGTH_SHORT).show();
+      }}.asInstanceOf[OnItemClickListener])
+  }
+
+  def sendMessage(view: View): Unit = {
+    //do nothing
   }
 }
