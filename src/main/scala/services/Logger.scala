@@ -11,7 +11,16 @@ import android.util.Log
  */
 
 trait Logger {
+  lazy val callingMethod = new RuntimeException().getStackTrace.apply(0).toString
+
   def warn(msg : String) = {
-    Log.w(getClass.getCanonicalName, msg)
+    Log.w(Logger.WARN + " : Class["+getClass.getCanonicalName+"] at method : [" + callingMethod+"] with message : ", msg)
   }
+}
+
+object Logger {
+  val WARN = "WARN"
+  val DEBUG = "DEBUG"
+  val INFO = "INFO"
+  val ERROR = "ERROR"
 }

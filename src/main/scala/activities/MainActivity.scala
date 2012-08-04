@@ -42,7 +42,7 @@ class MainActivity extends Activity with TypedActivity with ApacheHttpClient wit
 
     warn ("This is the message : " + _message)
 
-    val maybeMsg = JsonParser.parse(_message).extract[Option[Message]]
+    val maybeMsg = JsonParser.parse(_message).extractOpt[Message]
 
     intent.putExtra(MainActivity.EXTRA_MESSAGE, maybeMsg.toString)
     startActivity(intent)
