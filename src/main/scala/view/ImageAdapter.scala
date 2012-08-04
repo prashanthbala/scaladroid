@@ -1,6 +1,6 @@
 package view
 
-import android.widget.{GridView, ImageView, BaseAdapter}
+import android.widget.{AbsListView, GridView, ImageView, BaseAdapter}
 import android.view.{ViewGroup, View}
 import android.content.Context
 import com.prashanthbala.personal.androidscala.test1.R
@@ -29,7 +29,7 @@ class ImageAdapter(mContext : Context) extends BaseAdapter{
     val imageView = convertView match {
       case null =>  // if it's not recycled, initialize some attributes
         val imageView : ImageView = new ImageView(mContext)
-        imageView.setLayoutParams(new ViewGroup.LayoutParams(85, 85))
+        imageView.setLayoutParams(new AbsListView.LayoutParams(85, 85))
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP)
         imageView.setPadding(8, 8, 8, 8)
         imageView

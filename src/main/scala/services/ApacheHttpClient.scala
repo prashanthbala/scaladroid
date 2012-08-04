@@ -101,7 +101,7 @@ trait ApacheHttpClient {
 }
 
 object ApacheHttpClient {
-  val TAG = "ApacheHttpClient.scala"
+  val TAG = "ApacheHttpClient.scala"  //for logging
   val DEFAULT_CONNECTION_TIMEOUT_SECONDS = 50
   val DEFAULT_CONNECTION_SOCKET_TIMEOUT_SECONDS = 50
 }

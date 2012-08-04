@@ -45,6 +45,7 @@ class MainActivity extends TypedActivity with ApacheHttpClient with Logger{
     val maybeMsg = JsonParser.parse(_message).extractOpt[Message]
 
     intent.putExtra(MainActivity.EXTRA_MESSAGE, maybeMsg.toString)
+    warn ("This is the parsed message : " + maybeMsg.toString)
     startActivity(intent)
   }
 
