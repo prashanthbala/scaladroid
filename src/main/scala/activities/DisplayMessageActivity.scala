@@ -17,7 +17,7 @@ import view.ImageAdapter
  * To change this template use File | Settings | File Templates.
  */
 
-class DisplayMessageActivity extends Activity with TypedActivity {
+class DisplayMessageActivity extends TypedActivity {
   override def onCreate(savedInstanceState: Bundle) = {
     super.onCreate(savedInstanceState)
     setContentView(TR.layout.activity_display_message.id)
@@ -37,11 +37,15 @@ class DisplayMessageActivity extends Activity with TypedActivity {
     val gridView : GridView = findView(TR.gridview)
     gridView setAdapter(new ImageAdapter(this))
 
-    // Create a message handling object as an anonymous class.
-    gridView.setOnItemClickListener({
-      def onItemClick(adapterView : AdapterView[ImageAdapter], v : View, position : Int, id : Long) {
-        Toast.makeText(DisplayMessageActivity.this, "" + position, Toast.LENGTH_SHORT).show();
-      }}.asInstanceOf[OnItemClickListener])
+//    object x extends OnItemClickListener {
+//      implicit def adapterViewWrapper[T <: AdapterView](adpt: T) = new AdapterView(adpt.getContext)
+//      override def onItemClick(adapterView : T, v : View, position : Int, id : Long) {
+//        Toast.makeText(DisplayMessageActivity.this, "" + position, Toast.LENGTH_SHORT).show();
+//      }
+//    }
+//
+//    // Create a message handling object as an anonymous class.
+//    gridView.setOnItemClickListener(x)
   }
 
   def sendMessage(view: View): Unit = {

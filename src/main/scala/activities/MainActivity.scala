@@ -11,7 +11,7 @@ import com.prashanthbala.personal.androidscala.test1.{TR, R, TypedActivity}
 import services.{Logger, ApacheHttpClient}
 import net.liftweb.json._
 
-class MainActivity extends Activity with TypedActivity with ApacheHttpClient with Logger{
+class MainActivity extends TypedActivity with ApacheHttpClient with Logger{
   override def onCreate(bundle: Bundle) {
     super.onCreate(bundle)
     setContentView(R.layout.main)

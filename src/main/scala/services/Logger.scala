@@ -1,6 +1,8 @@
 package services
 
 import android.util.Log
+import java.text.{SimpleDateFormat, DateFormat}
+import java.util.Date
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,10 +13,15 @@ import android.util.Log
  */
 
 trait Logger {
-  lazy val callingMethod = new RuntimeException().getStackTrace.apply(0).toString
+  lazy val callingMethod = new RuntimeException().getStackTrace.apply(2).toString
+  val dateFormat  = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
+
 
   def warn(msg : String) = {
-    Log.w(Logger.WARN + " : Class["+getClass.getCanonicalName+"] at method : [" + callingMethod+"] with message : ", msg)
+    //TODO get TAG field from object because we can use logcat to filter the logs based on the tag for any calling class and priority level
+    //then again we could always grep in which case the date are more useful, could use a combination of both by splitting the tag
+    val loggerString = " : [" + (dateFormat format (new Date())) + "]" +" : " + callingMethod + " ::: "
+    Log.w(Logger.WARN + loggerString, msg)
   }
 }
 
