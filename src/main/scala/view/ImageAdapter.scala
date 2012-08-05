@@ -4,6 +4,7 @@ import android.widget.{AbsListView, GridView, ImageView, BaseAdapter}
 import android.view.{ViewGroup, View}
 import android.content.Context
 import com.prashanthbala.personal.androidscala.test1.R
+import services.Logger
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,7 +14,7 @@ import com.prashanthbala.personal.androidscala.test1.R
  * To change this template use File | Settings | File Templates.
  */
 
-class ImageAdapter(mContext : Context) extends BaseAdapter{
+class ImageAdapter(mContext : Context) extends BaseAdapter with Logger{
   def getCount : Int = {
     mThumbIds.length
   }
@@ -22,6 +23,7 @@ class ImageAdapter(mContext : Context) extends BaseAdapter{
   }
 
   def getItemId (postition : Int) : Long = {
+    warn ("postion is : " + postition)
     0L
   }
 

@@ -38,9 +38,8 @@ class DisplayMessageActivity extends TypedActivity {
     gridView setAdapter(new ImageAdapter(this))
 
 //    object x extends OnItemClickListener {
-//      implicit def adapterViewWrapper[T <: AdapterView](adpt: T) = new AdapterView(adpt.getContext)
-//      override def onItemClick(adapterView : T, v : View, position : Int, id : Long) {
-//        Toast.makeText(DisplayMessageActivity.this, "" + position, Toast.LENGTH_SHORT).show();
+//      override def onItemClick[E, T <: Adapter](adapterView : AdapterView[T], v : View, position : Int, id : Long) : Unit = {
+//        Toast.makeText(DisplayMessageActivity.this, "" + position, Toast.LENGTH_SHORT).show()
 //      }
 //    }
 //

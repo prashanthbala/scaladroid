@@ -10,8 +10,9 @@ import actors.Futures._
 import com.prashanthbala.personal.androidscala.test1.{TR, R, TypedActivity}
 import services.{Logger, ApacheHttpClient}
 import net.liftweb.json._
+import view.Loading
 
-class MainActivity extends TypedActivity with ApacheHttpClient with Logger{
+class MainActivity extends TypedActivity with ApacheHttpClient with Logger with Loading{
   override def onCreate(bundle: Bundle) {
     super.onCreate(bundle)
     setContentView(R.layout.main)
@@ -34,15 +35,16 @@ class MainActivity extends TypedActivity with ApacheHttpClient with Logger{
       case false => customUrl
     }
 
-    val message: Future[Option[String]] = get(url)
-
-    val _message = message.apply().getOrElse("Something went wrong while getting message from server")
+    val message : String  = showProgressBar[this.type, Option[String]] (this, "Fetching Data...") {
+      Thread.sleep(5000)
+      get(url)
+    }.getOrElse("Something went wrong while getting message from server")
 
     implicit val formats = DefaultFormats
 
-    warn ("This is the message : " + _message)
+    warn ("This is the message : " + message)
 
-    val maybeMsg = JsonParser.parse(_message).extractOpt[Message]
+    val maybeMsg = JsonParser.parse(message).extractOpt[Message]
 
     intent.putExtra(MainActivity.EXTRA_MESSAGE, maybeMsg.toString)
     warn ("This is the parsed message : " + maybeMsg.toString)

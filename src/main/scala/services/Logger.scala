@@ -20,7 +20,7 @@ trait Logger {
   def warn(msg : String) = {
     //TODO get TAG field from object because we can use logcat to filter the logs based on the tag for any calling class and priority level
     //then again we could always grep in which case the date are more useful, could use a combination of both by splitting the tag
-    val loggerString = " : [" + (dateFormat format (new Date())) + "]" +" : " + callingMethod + " ::: "
+    val loggerString = " : [" + (dateFormat format (new Date())) + "]" +" : " + callingMethod + " :  "
     Log.w(Logger.WARN + loggerString, msg)
   }
 }
