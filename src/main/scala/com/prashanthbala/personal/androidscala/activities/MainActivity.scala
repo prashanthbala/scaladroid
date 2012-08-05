@@ -37,7 +37,7 @@ class MainActivity extends TypedActivity with ApacheHttpClient with Logger with 
 
     val message: String = showProgressBar[this.type, Option[String]](MainActivity.this, "Fetching Data...", true) {
       get(url)
-    }.getOrElse(""" "message" : "Something went wrong while getting message from server" """)
+    }.getOrElse("""{"message" : "Something went wrong while getting message from server"}""")
 
     implicit val formats = DefaultFormats
 
