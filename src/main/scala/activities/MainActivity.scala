@@ -35,12 +35,7 @@ class MainActivity extends TypedActivity with ApacheHttpClient with Logger with 
       case false => customUrl
     }
 
-    Thread.sleep(1000)
-    val dialog : ProgressDialog = ProgressDialog.show(MainActivity.this, "",
-      "Loading. Please wait...", true)
-    Thread.sleep(1000)
-
-    val message : String  = showProgressBar[this.type, Option[String]] (this, "Fetching Data...") {
+    val message : String  = showProgressBar[this.type, Option[String]] (MainActivity.this, "Fetching Data...", true) {
       Thread.sleep(5000)
       get(url)
     }.getOrElse("Something went wrong while getting message from server")

@@ -14,19 +14,21 @@ import services.Logger
  */
 
 trait Loading extends Logger{
-  def showProgressBar[T <: Context, U] (that: T, msg : String) (block : => Future[U]) : U = {
+  def showProgressBar[T <: Context, U] (that: T, msg : String, cancellable : Boolean = false) (block : => Future[U]) : U = {
+//    val dialog : ProgressDialog = ProgressDialog.show(that, "",
+//      msg, true, cancellable)
     val progressDialog : ProgressDialog = new ProgressDialog(that)
     progressDialog setMessage msg
     progressDialog setProgressStyle ProgressDialog.STYLE_HORIZONTAL
-    progressDialog setCancelable false
+    progressDialog setCancelable cancellable
+    progressDialog setIndeterminate true
+    progressDialog setTitle ""
     progressDialog.show
-    if (progressDialog.isShowing)
-      warn ("cool")
-    else
-      warn ("fuck")
 
     val result = block.apply
-    progressDialog.dismiss
+//    progressDialog.dismiss
     result
   }
+
+  //TODO implement a method that takes a cancellation callback and implement show using that
 }
