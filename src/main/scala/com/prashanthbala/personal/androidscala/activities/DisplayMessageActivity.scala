@@ -1,13 +1,13 @@
-package activities
+package com.prashanthbala.personal.androidscala.activities
 
 import android.app.Activity
 import android.os.Bundle
 import android.content.Intent
 import android.widget._
-import com.prashanthbala.personal.androidscala.test1.{TR, TypedActivity}
+import com.prashanthbala.personal.androidscala.{TR, TypedActivity}
 import android.widget.AdapterView.OnItemClickListener
 import android.view.View
-import view.ImageAdapter
+import com.prashanthbala.personal.androidscala.view.ImageAdapter
 
 /**
  * Created with IntelliJ IDEA.
@@ -32,19 +32,17 @@ class DisplayMessageActivity extends TypedActivity {
 
     setContentView(TR.layout.activity_display_message.id)
 
-    val strings : Array[String] = Array[String]("yo", "wattup", "how does it")
+    val strings: Array[String] = Array[String]("yo", "wattup", "how does it")
     val adapter = new ArrayAdapter[String](this, android.R.layout.simple_list_item_1, strings)
-    val gridView : GridView = findView(TR.gridview)
-    gridView setAdapter(new ImageAdapter(this))
+    val gridView: GridView = findView(TR.gridview)
+    gridView setAdapter (new ImageAdapter(this))
 
-//    object x extends OnItemClickListener {
-//      override def onItemClick[E, T <: Adapter](adapterView : AdapterView[T], v : View, position : Int, id : Long) : Unit = {
-//        Toast.makeText(DisplayMessageActivity.this, "" + position, Toast.LENGTH_SHORT).show()
-//      }
-//    }
-//
-//    // Create a message handling object as an anonymous class.
-//    gridView.setOnItemClickListener(x)
+    // Create a message handling object as an anonymous class.
+    gridView.setOnItemClickListener(new OnItemClickListener {
+      def onItemClick(adapterView: AdapterView[_], v: View, position: Int, id: Long) {
+        Toast.makeText(DisplayMessageActivity.this, "" + position, Toast.LENGTH_SHORT).show
+      }
+    })
   }
 
   def sendMessage(view: View): Unit = {

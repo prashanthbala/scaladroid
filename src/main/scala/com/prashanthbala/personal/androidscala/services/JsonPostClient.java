@@ -1,10 +1,13 @@
-package services; /**
+package com.prashanthbala.personal.androidscala.services;
+
+/**
  * Created with IntelliJ IDEA.
  * User: Prashanth
  * Date: 8/1/12
  * Time: 12:42 AM
  * To change this template use File | Settings | File Templates.
  */
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;

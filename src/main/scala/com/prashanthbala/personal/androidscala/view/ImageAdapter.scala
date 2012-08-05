@@ -1,10 +1,10 @@
-package view
+package com.prashanthbala.personal.androidscala.view
 
 import android.widget.{AbsListView, GridView, ImageView, BaseAdapter}
 import android.view.{ViewGroup, View}
 import android.content.Context
-import com.prashanthbala.personal.androidscala.test1.R
-import services.Logger
+import com.prashanthbala.personal.androidscala.R
+import com.prashanthbala.personal.androidscala.services.Logger
 
 /**
  * Created with IntelliJ IDEA.

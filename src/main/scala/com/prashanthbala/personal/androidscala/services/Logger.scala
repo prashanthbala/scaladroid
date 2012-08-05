@@ -1,4 +1,4 @@
-package services
+package com.prashanthbala.personal.androidscala.services
 
 import android.util.Log
 import java.text.{SimpleDateFormat, DateFormat}
@@ -13,7 +13,7 @@ import java.util.Date
  */
 
 trait Logger {
-  lazy val callingMethod = new RuntimeException().getStackTrace.apply(2).toString
+  lazy val callingMethod = new RuntimeException().getStackTrace.apply(1).toString
   val dateFormat  = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
 
 

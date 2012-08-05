@@ -1,4 +1,4 @@
-package services
+package com.prashanthbala.personal.androidscala.services
 
 
 import org.apache.http.impl.client.DefaultHttpClient

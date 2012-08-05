@@ -1,18 +1,18 @@
-package activities
+package com.prashanthbala.personal.androidscala.activities
 
 import android.os.{Parcelable, Bundle}
-import android.widget.EditText
+import android.widget.{Toast, EditText}
 import android.view.View
 import android.content.Intent
 import android.app.{ProgressDialog, Activity}
 import actors.Future
 import actors.Futures._
-import com.prashanthbala.personal.androidscala.test1.{TR, R, TypedActivity}
-import services.{Logger, ApacheHttpClient}
+import com.prashanthbala.personal.androidscala.{TR, R, TypedActivity}
+import com.prashanthbala.personal.androidscala.services.{Logger, ApacheHttpClient}
 import net.liftweb.json._
-import view.Loading
+import com.prashanthbala.personal.androidscala.view.Loading
 
-class MainActivity extends TypedActivity with ApacheHttpClient with Logger with Loading{
+class MainActivity extends TypedActivity with ApacheHttpClient with Logger with Loading {
   override def onCreate(bundle: Bundle) {
     super.onCreate(bundle)
     setContentView(R.layout.main)
@@ -28,26 +28,26 @@ class MainActivity extends TypedActivity with ApacheHttpClient with Logger with 
 
   def sendMessage(view: View): Unit = {
     val intent: Intent = new Intent(this, classOf[DisplayMessageActivity])
-    val customUrl : String = findView[EditText](TR.editTextField).getText.toString
+    val customUrl: String = findView[EditText](TR.editTextField).getText.toString
 
     val url: String = customUrl.isEmpty match {
       case true => MainActivity.DEFAULT_URL
       case false => customUrl
     }
 
-    val message : String  = showProgressBar[this.type, Option[String]] (MainActivity.this, "Fetching Data...", true) {
-      Thread.sleep(5000)
+    val message: String = showProgressBar[this.type, Option[String]](MainActivity.this, "Fetching Data...", true) {
       get(url)
-    }.getOrElse("Something went wrong while getting message from server")
+    }.getOrElse(""" "message" : "Something went wrong while getting message from server" """)
 
     implicit val formats = DefaultFormats
 
-    warn ("This is the message : " + message)
+    warn("This is the message : " + message)
 
-    val maybeMsg = JsonParser.parse(message).extractOpt[Message]
+    val maybeMsg = (JsonParser.parse(message) \ ("message")).extractOpt[String].getOrElse("This wasn't recieved from the server")
+    Toast.makeText(MainActivity.this, maybeMsg, Toast.LENGTH_SHORT).show
 
-    intent.putExtra(MainActivity.EXTRA_MESSAGE, maybeMsg.toString)
-    warn ("This is the parsed message : " + maybeMsg.toString)
+    intent.putExtra(MainActivity.EXTRA_MESSAGE, maybeMsg)
+    warn("This is the parsed message : " + maybeMsg)
     startActivity(intent)
   }
 

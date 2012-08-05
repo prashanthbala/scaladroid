@@ -31,3 +31,8 @@ src/main/.classpath
 src/main/.project
 src/main/project.properties
 
+#Proguard Cache Eclipse Extras
+src/main/libs/
+src/main/proguard_cache/
+src/main/proguard_cache_conf/
+.history

@@ -1,9 +1,12 @@
 package com.prashanthbala.personal.androidscala.test1.tests
 
+import activities.MainActivity
 import com.prashanthbala.personal.androidscala.test1._
 import junit.framework.Assert._
 import _root_.android.test.AndroidTestCase
 import _root_.android.test.ActivityInstrumentationTestCase2
+import com.prashanthbala.personal.androidscala.{activities, MainActivity}
+import activities.MainActivity
 import activities.MainActivity
 
 class AndroidTests extends AndroidTestCase {
