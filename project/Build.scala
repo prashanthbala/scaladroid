@@ -47,14 +47,15 @@ object General {
       keyalias in Android := "change-me",
       libraryDependencies ++= Seq(
         "org.scalatest" %% "scalatest" % "1.8" % "test",
+        "net.liftweb" % "lift-webkit_2.9.1" % "2.4" % "compile->default",
+        "net.liftweb" % "lift-mapper_2.9.1" % "2.4" % "compile->default",
+        "net.liftweb" % "lift-wizard_2.9.1" % "2.4" % "compile->default"
+        //other libraries that can also be useful that work nicely
         //"net.databinder.dispatch" %% "core" % "0.9.0",
         //"com.codahale" % "jerkson_2.9.1" % "0.5.0"
         //"org.codehaus.jackson" % "jackson-mapper-asl" % "2.0.2",
         //"org.codehaus.jackson" % "jackson-core-asl" % "2.0.2",
         //"com.fasterxml" % "jackson-scala" % "1.9.1"
-        "net.liftweb" % "lift-webkit_2.9.1" % "2.4" % "compile->default",
-        "net.liftweb" % "lift-mapper_2.9.1" % "2.4" % "compile->default",
-        "net.liftweb" % "lift-wizard_2.9.1" % "2.4" % "compile->default"
       ),
       resolvers ++= Seq(
         "Codahale Repo" at "http://repo.codahale.com",

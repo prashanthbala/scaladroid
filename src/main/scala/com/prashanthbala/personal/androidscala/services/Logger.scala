@@ -13,15 +13,28 @@ import java.util.Date
  */
 
 trait Logger {
-  lazy val callingMethod = new RuntimeException().getStackTrace.apply(1).toString
+  lazy val callingMethod = new RuntimeException().getStackTrace.apply(2).toString
   val dateFormat  = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
 
+  def loggerString = " : [" + (dateFormat format (new Date())) + "]" +" : " + callingMethod + " :  "
+
+  //Note: We could get TAG field from object because we can use logcat to filter the logs based on the tag for any calling class and priority level
+  //then again we could always grep in which case the date are more useful, could use a combination of both by splitting the tag
 
   def warn(msg : String) = {
-    //TODO get TAG field from object because we can use logcat to filter the logs based on the tag for any calling class and priority level
-    //then again we could always grep in which case the date are more useful, could use a combination of both by splitting the tag
-    val loggerString = " : [" + (dateFormat format (new Date())) + "]" +" : " + callingMethod + " :  "
-    Log.e(Logger.WARN + loggerString, msg)
+    Log.w(Logger.WARN + loggerString, msg)
+  }
+  def debug(msg : String) = {
+    Log.d(Logger.DEBUG + loggerString, msg)
+  }
+  def info(msg : String) = {
+    Log.i(Logger.INFO + loggerString, msg)
+  }
+  def error(msg : String) = {
+    Log.e(Logger.ERROR + loggerString, msg)
+  }
+  def verbose(msg : String) = {
+    Log.v(Logger.VERBOSE + loggerString, msg)
   }
 }
 
@@ -30,4 +43,5 @@ object Logger {
   val DEBUG = "DEBUG"
   val INFO = "INFO"
   val ERROR = "ERROR"
+  val VERBOSE = "VERBOSE"
 }

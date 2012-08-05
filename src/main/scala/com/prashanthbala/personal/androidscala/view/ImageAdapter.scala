@@ -4,7 +4,6 @@ import android.widget.{AbsListView, GridView, ImageView, BaseAdapter}
 import android.view.{ViewGroup, View}
 import android.content.Context
 import com.prashanthbala.personal.androidscala.R
-import com.prashanthbala.personal.androidscala.services.Logger
 
 /**
  * Created with IntelliJ IDEA.
@@ -23,7 +22,6 @@ class ImageAdapter(mContext : Context) extends BaseAdapter with Logger{
   }
 
   def getItemId (postition : Int) : Long = {
-    warn ("postion is : " + postition)
     0L
   }
 

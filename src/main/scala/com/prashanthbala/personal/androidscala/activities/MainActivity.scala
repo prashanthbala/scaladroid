@@ -41,13 +41,13 @@ class MainActivity extends TypedActivity with ApacheHttpClient with Logger with 
 
     implicit val formats = DefaultFormats
 
-    warn("This is the message : " + message)
+    debug ("This is the message : " + message)
 
     val maybeMsg = (JsonParser.parse(message) \ ("message")).extractOpt[String].getOrElse("Error occured while parsing message recieved from server")
     Toast.makeText(MainActivity.this, maybeMsg, Toast.LENGTH_SHORT).show
 
     intent.putExtra(MainActivity.EXTRA_MESSAGE, maybeMsg)
-    warn("This is the parsed message : " + maybeMsg)
+    debug ("This is the parsed message : " + maybeMsg)
     startActivity(intent)
   }
 

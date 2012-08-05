@@ -3,8 +3,6 @@ package com.prashanthbala.personal.androidscala.view
 import android.app.ProgressDialog
 import android.content.Context
 import actors.Future
-import com.prashanthbala.personal.androidscala.services.Logger
-import scala.actors.Futures.synchronized
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,7 +12,7 @@ import scala.actors.Futures.synchronized
  * To change this template use File | Settings | File Templates.
  */
 
-trait Loading extends Logger{
+trait Loading {
   def showProgressBar[T <: Context, U] (that: T, msg : String, cancellable : Boolean = true) (block : => Future[U]) : U = {
     val progressDialog : ProgressDialog = new ProgressDialog(that)
     progressDialog setMessage msg
