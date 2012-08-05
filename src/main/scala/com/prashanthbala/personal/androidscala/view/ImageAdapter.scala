@@ -13,7 +13,7 @@ import com.prashanthbala.personal.androidscala.R
  * To change this template use File | Settings | File Templates.
  */
 
-class ImageAdapter(mContext : Context) extends BaseAdapter with Logger{
+class ImageAdapter(mContext : Context) extends BaseAdapter {
   def getCount : Int = {
     mThumbIds.length
   }
