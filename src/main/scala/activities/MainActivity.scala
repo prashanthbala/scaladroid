@@ -4,7 +4,7 @@ import android.os.{Parcelable, Bundle}
 import android.widget.EditText
 import android.view.View
 import android.content.Intent
-import android.app.Activity
+import android.app.{ProgressDialog, Activity}
 import actors.Future
 import actors.Futures._
 import com.prashanthbala.personal.androidscala.test1.{TR, R, TypedActivity}
@@ -34,6 +34,11 @@ class MainActivity extends TypedActivity with ApacheHttpClient with Logger with 
       case true => MainActivity.DEFAULT_URL
       case false => customUrl
     }
+
+    Thread.sleep(1000)
+    val dialog : ProgressDialog = ProgressDialog.show(MainActivity.this, "",
+      "Loading. Please wait...", true)
+    Thread.sleep(1000)
 
     val message : String  = showProgressBar[this.type, Option[String]] (this, "Fetching Data...") {
       Thread.sleep(5000)
