@@ -35,7 +35,7 @@ class MainActivity extends TypedActivity with ApacheHttpClient with Logger with 
       case false => customUrl
     }
 
-    val message: String = showProgressBar[this.type, Option[String]](MainActivity.this, "Fetching Data...", true) {
+    val message: String = showProgressBar[this.type, Option[String]](MainActivity.this, "Fetching Data...") {
       get(url)
     }.getOrElse("""{"message" : "Something went wrong while getting message from server"}""")
 
@@ -43,7 +43,7 @@ class MainActivity extends TypedActivity with ApacheHttpClient with Logger with 
 
     warn("This is the message : " + message)
 
-    val maybeMsg = (JsonParser.parse(message) \ ("message")).extractOpt[String].getOrElse("This wasn't recieved from the server")
+    val maybeMsg = (JsonParser.parse(message) \ ("message")).extractOpt[String].getOrElse("Error occured while parsing message recieved from server")
     Toast.makeText(MainActivity.this, maybeMsg, Toast.LENGTH_SHORT).show
 
     intent.putExtra(MainActivity.EXTRA_MESSAGE, maybeMsg)
