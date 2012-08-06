@@ -43,8 +43,9 @@ object General {
     proguardSettings ++
     AndroidManifestGenerator.settings ++
     AndroidMarketPublish.settings ++
+    AndroidInstall.settings ++
     Seq (
-      keyalias in Android := "change-me",
+      keyalias in Android := "pbala",
       libraryDependencies ++= Seq(
         "org.scalatest" %% "scalatest" % "1.8" % "test",
         "net.liftweb" % "lift-webkit_2.9.1" % "2.4" % "compile->default",
@@ -61,7 +62,8 @@ object General {
         "Codahale Repo" at "http://repo.codahale.com",
          "Scala Tools Releases" at "https://oss.sonatype.org/content/groups/scala-tools/"
          //"Java.net Maven2 Repository" at "http://download.java.net/maven/2/"
-      )
+      ),
+      compileOrder := CompileOrder.JavaThenScala
     )
 }
 

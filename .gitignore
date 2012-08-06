@@ -36,3 +36,6 @@ src/main/libs/
 src/main/proguard_cache/
 src/main/proguard_cache_conf/
 .history
+
+#Lint Stuff
+src/main/lint.xml
