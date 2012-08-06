@@ -39,3 +39,8 @@ src/main/proguard_cache_conf/
 
 #Lint Stuff
 src/main/lint.xml
+
+#Eclipse Extras
+src/main/.cache
+src/main/.externalToolBuilders/
+src/main/.settings/
