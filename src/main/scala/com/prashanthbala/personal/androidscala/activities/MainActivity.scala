@@ -8,7 +8,6 @@ import android.app.{ProgressDialog, Activity}
 import actors.Future
 import actors.Futures._
 import com.prashanthbala.personal.androidscala.services.{Logger, ApacheHttpClient}
-import net.liftweb.json._
 import com.prashanthbala.personal.androidscala.view.Loading
 import com.prashanthbala.personal.androidscala.R._
 
@@ -43,11 +42,11 @@ class MainActivity extends Activity with ApacheHttpClient with Logger with Loadi
 
     debug ("This is the message : " + message)
 
-    val maybeMsg = (JsonParser.parse(message) \ ("message")).extractOpt[String].getOrElse("Error occured while parsing message recieved from server")
-    Toast.makeText(MainActivity.this, maybeMsg, Toast.LENGTH_SHORT).show
+    //val maybeMsg = (JsonParser.parse(message) \ ("message")).extractOpt[String].getOrElse("Error occured while parsing message recieved from server")
+    Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show
 
-    intent.putExtra(MainActivity.EXTRA_MESSAGE, maybeMsg)
-    debug ("This is the parsed message : " + maybeMsg)
+    intent.putExtra(MainActivity.EXTRA_MESSAGE, message)
+    //debug ("This is the parsed message : " + maybeMsg)
     startActivity(intent)
   }
 
