@@ -47,10 +47,10 @@ object General {
     Seq (
       keyalias in Android := "pbala",
       libraryDependencies ++= Seq(
-        "org.scalatest" %% "scalatest" % "1.8" % "test",
-        "net.liftweb" % "lift-webkit_2.9.1" % "2.4" % "compile->default",
-        "net.liftweb" % "lift-mapper_2.9.1" % "2.4" % "compile->default",
-        "net.liftweb" % "lift-wizard_2.9.1" % "2.4" % "compile->default"
+        "org.scalatest" %% "scalatest" % "1.8" % "test"
+//        "net.liftweb" % "lift-webkit_2.9.1" % "2.4" % "compile->default",
+//        "net.liftweb" % "lift-mapper_2.9.1" % "2.4" % "compile->default",
+//        "net.liftweb" % "lift-wizard_2.9.1" % "2.4" % "compile->default",
         //other libraries that can also be useful that work nicely
         //"net.databinder.dispatch" %% "core" % "0.9.0",
         //"com.codahale" % "jerkson_2.9.1" % "0.5.0"
