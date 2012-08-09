@@ -38,7 +38,7 @@ class MainActivity extends TypedActivity with ApacheHttpClient with Logger with 
       get(url)
     }.getOrElse("""{"message" : "Something went wrong while getting message from server"}""")
 
-    implicit val formats = DefaultFormats
+    //implicit val formats = DefaultFormats
 
     debug ("This is the message : " + message)
 
