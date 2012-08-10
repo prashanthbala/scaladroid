@@ -7,15 +7,15 @@ import android.content.Intent
 import android.app.{ProgressDialog, Activity}
 import actors.Future
 import actors.Futures._
-import com.prashanthbala.personal.androidscala.{TR, R, TypedActivity}
 import com.prashanthbala.personal.androidscala.services.{Logger, ApacheHttpClient}
 import com.prashanthbala.personal.androidscala.view.Loading
+import com.prashanthbala.personal.androidscala.R._
 
-class MainActivity extends TypedActivity with ApacheHttpClient with Logger with Loading {
+class MainActivity extends Activity with ApacheHttpClient with Logger with Loading {
   override def onCreate(bundle: Bundle) {
     super.onCreate(bundle)
-    setContentView(R.layout.main)
-    findView(TR.editTextField) setHint "type something here"
+    setContentView(layout.main)
+    (findViewById(id.editTextField).asInstanceOf[EditText]) setHint "type something here"
   }
 
   case class Message(message: String)
@@ -27,7 +27,7 @@ class MainActivity extends TypedActivity with ApacheHttpClient with Logger with 
 
   def sendMessage(view: View): Unit = {
     val intent: Intent = new Intent(this, classOf[DisplayMessageActivity])
-    val customUrl: String = findView[EditText](TR.editTextField).getText.toString
+    val customUrl: String = (findViewById(id.editTextField).asInstanceOf[EditText]).getText.toString
 
     val url: String = customUrl.isEmpty match {
       case true => MainActivity.DEFAULT_URL

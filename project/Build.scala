@@ -39,7 +39,7 @@ object General {
   lazy val fullAndroidSettings =
     General.settings ++
     AndroidProject.androidSettings ++
-    TypedResources.settings ++
+    //TypedResources.settings ++
     proguardSettings ++
     AndroidManifestGenerator.settings ++
     AndroidMarketPublish.settings ++

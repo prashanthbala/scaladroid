@@ -4,10 +4,10 @@ import android.app.Activity
 import android.os.Bundle
 import android.content.Intent
 import android.widget._
-import com.prashanthbala.personal.androidscala.{TR, TypedActivity}
 import android.widget.AdapterView.OnItemClickListener
 import android.view.View
 import com.prashanthbala.personal.androidscala.view.ImageAdapter
+import com.prashanthbala.personal.androidscala.R._
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,10 +17,10 @@ import com.prashanthbala.personal.androidscala.view.ImageAdapter
  * To change this template use File | Settings | File Templates.
  */
 
-class DisplayMessageActivity extends TypedActivity {
+class DisplayMessageActivity extends Activity {
   override def onCreate(savedInstanceState: Bundle) = {
     super.onCreate(savedInstanceState)
-    setContentView(TR.layout.activity_display_message.id)
+    setContentView(layout.main)
     val intent: Intent = getIntent
     val msg: String = intent getStringExtra MainActivity.EXTRA_MESSAGE
 
@@ -30,11 +30,11 @@ class DisplayMessageActivity extends TypedActivity {
 
     setContentView(text)
 
-    setContentView(TR.layout.activity_display_message.id)
+    setContentView(layout.activity_display_message)
 
     val strings: Array[String] = Array[String]("yo", "wattup", "how does it")
     val adapter = new ArrayAdapter[String](this, android.R.layout.simple_list_item_1, strings)
-    val gridView: GridView = findView(TR.gridview)
+    val gridView: GridView = findViewById(id.gridview).asInstanceOf[GridView]
     gridView setAdapter (new ImageAdapter(this))
 
     // Create a message handling object as an anonymous class.
