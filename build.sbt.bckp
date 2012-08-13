@@ -1,6 +1,6 @@
 import AndroidKeys._
 
-name := "pcache"
+name := "scaladroid1"
 
 Seq(ProguardCache.Settings.settings: _*)
 

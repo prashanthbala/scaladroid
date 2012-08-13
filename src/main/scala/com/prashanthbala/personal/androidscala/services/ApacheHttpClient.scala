@@ -37,22 +37,28 @@ trait ApacheHttpClient {
       HttpConnectionParams setSoTimeout(httpParams, socketTimeoutSec * 1000)
       val httpClient = new DefaultHttpClient(httpParams) //params are optional, but prevent timeouts
 
-      val message = try {
+      val message : Option[String] = try {
         var content=""
         val response = httpClient execute (httpGet)
-        val entity = Option(response getEntity)
-        entity match {
-          case None  => //do nothing
-          case Some(_entity) =>
-            val inputStream = _entity.getContent
-            content = io.Source.fromInputStream(inputStream).getLines.mkString
-            inputStream.close
-        }
-        httpClient.getConnectionManager.shutdown
+        val statusCode : Int = response.getStatusLine.getStatusCode
+        statusCode match {
+          case 200 =>
+            val entity = Option(response getEntity)
+            entity match {
+              case None  => //do nothing
+              case Some(_entity) =>
+                val inputStream = _entity.getContent
+                content = io.Source.fromInputStream(inputStream).getLines.mkString
+                inputStream.close
+            }
+            httpClient.getConnectionManager.shutdown
 
-        content.isEmpty match {
-          case true => None
-          case false => Some(content)
+            content.isEmpty match {
+              case true => None
+              case false => Some(content)
+            }
+          case _ => Log.w(ApacheHttpClient.TAG, ("Status code returned from server while GET connecting to url" + url + "was : " + statusCode))
+                    None
         }
       }
       catch {

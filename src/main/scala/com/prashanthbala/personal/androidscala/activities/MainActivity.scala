@@ -1,17 +1,17 @@
 package com.prashanthbala.personal.androidscala.activities
 
-import android.os.{Parcelable, Bundle}
+import android.os.Bundle
 import android.widget.{Toast, EditText}
 import android.view.View
 import android.content.Intent
-import android.app.{ProgressDialog, Activity}
-import actors.Future
-import actors.Futures._
+import android.app.Activity
 import com.prashanthbala.personal.androidscala.services.{Logger, ApacheHttpClient}
 import com.prashanthbala.personal.androidscala.view.Loading
 import com.prashanthbala.personal.androidscala.R._
+import org.json._
+import com.prashanthbala.personal.androidscala.common.Threadify
 
-class MainActivity extends Activity with ApacheHttpClient with Logger with Loading {
+class MainActivity extends Activity with ApacheHttpClient with Logger with Loading with Threadify{
   override def onCreate(bundle: Bundle) {
     super.onCreate(bundle)
     setContentView(layout.main)
@@ -19,11 +19,6 @@ class MainActivity extends Activity with ApacheHttpClient with Logger with Loadi
   }
 
   case class Message(message: String)
-
-  implicit def toRunnable[F](f: => F): Runnable =
-    new Runnable() {
-      def run() = f
-    }
 
   def sendMessage(view: View): Unit = {
     val intent: Intent = new Intent(this, classOf[DisplayMessageActivity])
@@ -34,20 +29,18 @@ class MainActivity extends Activity with ApacheHttpClient with Logger with Loadi
       case false => customUrl
     }
 
-    val message: String = showProgressBar[this.type, Option[String]](MainActivity.this, "Fetching Data...") {
-      get(url)
-    }.getOrElse("""{"message" : "Something went wrong while getting message from server"}""")
+    showProgressBar(MainActivity.this, "Loading bro ... ", true) {
+      val message = get(url).apply().getOrElse("""{"message" : "Something went wrong while getting message from server"}""")
+      debug ("This is the message : " + message)
 
-    //implicit val formats = DefaultFormats
+      val msg = new JSONObject(message).optString("message", "yo")
 
-    debug ("This is the message : " + message)
+      runOnUiThread (Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show)
 
-    //val maybeMsg = (JsonParser.parse(message) \ ("message")).extractOpt[String].getOrElse("Error occured while parsing message recieved from server")
-    Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show
-
-    intent.putExtra(MainActivity.EXTRA_MESSAGE, message)
-    //debug ("This is the parsed message : " + maybeMsg)
-    startActivity(intent)
+      intent.putExtra(MainActivity.EXTRA_MESSAGE, msg)
+      debug ("This is the parsed message : " + msg)
+      runOnUiThread (startActivity(intent))
+    }
   }
 
   override def onStop() {
